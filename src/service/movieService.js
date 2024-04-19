@@ -30,7 +30,7 @@ export const movieSer = {
     return http.get(uri);
   },
   layThongTinRapChieuheThong: (maRap) => {
-    let uri = `/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=${maRap}&maNhom=${MA_NHOM}`;
+    let uri = `/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap?maNhom=${MA_NHOM}`;
     return http.get(uri);
   },
   getTinTuc24h: () => {
