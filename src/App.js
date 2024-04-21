@@ -28,7 +28,14 @@ function App() {
         {/* home template  */}
         <Route path="" element={<HomeTemplate />}>
           <Route index element={<HomePage />} />
-          <Route path="detail-account" element={<DetailAccount />} />
+          <Route
+            path="detail-account"
+            element={
+              <CheckUser>
+                <DetailAccount />
+              </CheckUser>
+            }
+          />
           <Route path="detail-movie/:idMovie" element={<DetailPage />} />
         </Route>
 

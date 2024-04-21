@@ -8,26 +8,23 @@ import {
 } from "../../../redux/loadingReducer/loadingSlice";
 
 const ListMovie = () => {
-  //Hook
   const [dataMovieList, setDataMovieList] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   useEffect(() => {
-    // call api
     fetchListMovie();
   }, []);
 
-  //Function
   const navigatePageDetail = (id) => {
     navigate(`detail-movie/${id}`);
   };
-  let fetchListMovie = async () => {
+
+  const fetchListMovie = async () => {
     dispatch(turnOnLoading());
     try {
       const data = await movieSer.getListMovie();
-      console.log("data List: ", data);
-
-      let movieList = data.data.content;
+      const movieList = data.data.content;
       setDataMovieList(movieList);
       setTimeout(() => {
         dispatch(turnOffLoading());
@@ -36,34 +33,25 @@ const ListMovie = () => {
       console.log("err: ", err);
     }
   };
-  const renderListMovie = () => {
-    // optional chaining operator
-    // dataMovieList ? "" : ""
 
+  const renderListMovie = () => {
     return dataMovieList?.map((movie) => {
       return (
         <div
-          onClick={() => {
-            navigatePageDetail(movie.maPhim);
-          }}
           key={movie.maPhim}
-          className="cursor-pointer border rounded-2xl"
+          className="cursor-pointer border rounded-2xl overflow-hidden hover:shadow-lg"
+          onClick={() => navigatePageDetail(movie.maPhim)}
         >
-          <div className="h-80">
-            {/* img  */}
+          <div className="h-64">
             <img
               src={movie.hinhAnh}
               className="w-full h-full object-cover"
-              alt=""
+              alt={movie.tenPhim}
             />
           </div>
-
-          {/* content  */}
-          <div className="p-3 space-y-2 rounded-2xl border ">
-            <p className="font-bold text-center text-sm">{movie.tenPhim}</p>
-            <p className="text-sm text-gray-400 text-center">
-              {movie.moTa.substring(0, 100)}...
-            </p>
+          <div className="p-4">
+            <p className="font-bold text-center text-lg mb-2">{movie.tenPhim}</p>
+            <p className="text-sm text-gray-600">{movie.moTa.substring(0, 100)}...</p>
           </div>
         </div>
       );
@@ -71,11 +59,11 @@ const ListMovie = () => {
   };
 
   return (
-    <div className="container max-w-7xl mx-auto py-5">
+    <div className="container mx-auto py-5 px-4 lg:px-0">
       <div className="text-3xl font-bold text-center mb-10">Danh sách phim</div>
-
-      {/* Danh sách phim */}
-      <div className="grid grid-cols-4 gap-7">{renderListMovie()}</div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {renderListMovie()}
+      </div>
     </div>
   );
 };
