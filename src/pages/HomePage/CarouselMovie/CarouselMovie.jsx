@@ -33,9 +33,9 @@ const CarouselMovie = () => {
   return (
     <div className="relative">
       <Carousel ref={carouRef}>
-        {dataBan.map((banner) => {
+        {dataBan.map((banner,i) => {
           return (
-            <div key={banner.maBanner} className="w-full">
+            <div key={i} className="w-full">
               <img
                 style={{ height: "500px" }}
                 className="h-full w-full"

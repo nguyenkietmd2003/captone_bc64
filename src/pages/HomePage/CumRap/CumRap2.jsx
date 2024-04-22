@@ -9,10 +9,10 @@ const MovieTabs = ({ data }) => {
 
   return (
     <div className="scrollbar scrollbar-thumb-sky-700 scrollbar-track-sky-300 h-96 overflow-y-scroll">
-      {data.map((film) => (
+      {data.map((film,i) => (
         <Collapse
           className="border-b mb-1 border-solid border-neutral-200"
-          key={film.maPhim}
+          key={i}
           bordered={false}
           expandIconPosition="end"
           defaultActiveKey={[1]}
@@ -92,8 +92,8 @@ const MoviesTab = () => {
         <Tabs
           tabPosition="left"
           className="container mx-auto mt-4 hover:shadow-sm"
-          items={dataMovies.map((Item) => ({
-            key: Item.maHeThongRap,
+          items={dataMovies.map((Item,i) => ({
+            key: i,
             label: (
               <div>
                 <img

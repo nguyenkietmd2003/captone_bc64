@@ -24,6 +24,7 @@ const ListMovie = () => {
     dispatch(turnOnLoading());
     try {
       const data = await movieSer.getListMovie();
+      console.log(data, "data from list movie")
       const movieList = data.data.content;
       setDataMovieList(movieList);
       setTimeout(() => {
@@ -35,10 +36,10 @@ const ListMovie = () => {
   };
 
   const renderListMovie = () => {
-    return dataMovieList?.map((movie) => {
+    return dataMovieList?.map((movie,i) => {
       return (
         <div
-          key={movie.maPhim}
+          key={i}
           className="cursor-pointer border rounded-2xl overflow-hidden hover:shadow-lg"
           onClick={() => navigatePageDetail(movie.maPhim)}
         >
